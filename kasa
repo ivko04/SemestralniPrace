@@ -1,0 +1,66 @@
+package newpackage;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class CashRegister {
+
+    public static void main(String[] args) {
+
+        double price;
+        double sum = 0;
+        int roundedSum;
+        int amOfTyp1 = 0;
+        double sumOfTyp1 = 0;
+        double min;
+        
+        
+        ArrayList<Double> cena = new ArrayList<Double>();
+        ArrayList<Integer> n = new ArrayList<Integer>();
+        ArrayList<Integer> typ = new ArrayList<Integer>();
+
+        Scanner sc = new Scanner(System.in);
+
+        while ((price = sc.nextDouble()) > 0) {
+            cena.add(price);
+            n.add(sc.nextInt());
+            typ.add(sc.nextInt());
+        }
+        
+        for (int i = 0; i < cena.size(); i++) {
+            System.out.println(cena.get(i) + "  " + n.get(i) + "  " + typ.get(i));
+        }
+
+        for (int i = 0; i < cena.size(); i++) {
+            sum += (cena.get(i)) * n.get(i);
+        }
+        
+        System.out.println("Celkova cena nakupu: " + sum);
+        
+        roundedSum = (int) Math.round(sum);
+        System.out.println("Celkova cena nakupu zaokrouhlena na cele koruny: "+ roundedSum);
+
+        for (int i = 0; i < typ.size(); i++) {
+            if (typ.get(i) == 1) {
+                amOfTyp1 += n.get(i);
+            }
+        }
+        System.out.println("Mnozstvi polozek typu potraviny: "+ amOfTyp1);
+
+        for (int i = 0; i < cena.size(); i++) {
+            if (typ.get(i) == 1) {
+            sumOfTyp1 += cena.get(i) * n.get(i);
+            }
+        }
+        System.out.println("Celkova cena za polozky typu potraviny: " + sumOfTyp1);
+        
+        min=Collections.min(cena);
+        System.out.println("Minimalni cenu polozky: " + min);
+        
+        boolean to=(sum>200)?true:false;
+        if(to==true){
+            System.out.println("Počet samolepek: "+((int)sum/200));
+        }
+    }
+}
