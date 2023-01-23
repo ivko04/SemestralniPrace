@@ -1,0 +1,73 @@
+package newpackage;
+
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.Collections;
+
+/**
+ *
+ * @author mcivko04
+ */
+public class Marathon {
+
+    public static void main(String[] args) {
+        final double length = 42.195;
+        final int chh = 9;
+        final int cmm = 15;
+        int lSthen207 = 0;
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        int fastest = 0;
+        int longest = 0;
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int bezcy[] = new int[n];
+        int hh[] = new int[n];
+        int mm[] = new int[n];
+        int ss[] = new int[n];
+        int cvs[] = new int[n];
+
+        for (int i = 0; i < n; i++) {
+            bezcy[i] = sc.nextInt();
+            hh[i] = sc.nextInt();
+            mm[i] = sc.nextInt();
+            ss[i] = sc.nextInt();
+        }
+
+        for (int i = 0; i < n; i++) {
+            cvs[i] = hh[i] * 3600 + mm[i] * 60 + ss[i];
+        }
+
+        for (int i = 0; i < n; i++) {
+            if (hh[i] <= 11) {
+                if (mm[i] < 22) {
+                    lSthen207 += 1;
+                }
+            }
+            if (cvs[i] < min) {
+                min = cvs[i];
+                fastest = i;
+            }
+
+            if (cvs[i] > max) {
+                max = cvs[i];
+                longest = i;
+            }
+        }
+        
+       
+        double fResult = cvs[fastest] -(chh*3600)-(cmm*60);
+        
+        double speed = (length/ fResult)*3600;
+        
+        System.out.println(lSthen207 + " běžci běželi pod 2:07.");
+        System.out.println("Číslo nejrychlejšího bězce je " + bezcy[fastest] + ".");
+        System.out.print("Poslední bězec měl ztrátu na prvního " + ((hh[longest] - hh[fastest])<10 ?("0" + (hh[longest] - hh[fastest])):((hh[longest] - hh[fastest]))) + ":");
+        System.out.println(((mm[longest] - mm[fastest])<10 ? ("0"+(mm[longest] - mm[fastest])) : ((mm[longest] - mm[fastest]))) + ":" + ((ss[longest] - ss[fastest])<10 ? ("0"+ (ss[longest] - ss[fastest])) : (ss[longest] - ss[fastest])) + ".");
+         
+        System.out.print("Průměrná rychlost nejrychlejšího bězce byla ");
+        System.out.printf("%.2f", speed);   
+        System.out.println(" km/h.");
+    }
+
+}
